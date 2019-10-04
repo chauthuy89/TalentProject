@@ -28,18 +28,54 @@ namespace Talent.Common.Services
         public async Task<string> GetFileURL(string id, FileType type)
         {
             //Your code here;
+            //var fileUrl = "";
+            //string pathWeb = _environment.ContentRootPath;
+
+            //if (id != null && type == FileType.ProfilePhoto)
+            //{
+            //    fileUrl = "/images/" + id;
+            //}
+            //return fileUrl;
             throw new NotImplementedException();
         }
 
         public async Task<string> SaveFile(IFormFile file, FileType type)
         {
             //Your code here;
-            throw new NotImplementedException();
+            var myUniqueFileName = "";
+            string pathWeb = "";
+            pathWeb = _environment.ContentRootPath;
+
+            if (file != null && type == FileType.ProfilePhoto && pathWeb != "")
+            {
+                string pathValue = pathWeb + _tempFolder;
+                myUniqueFileName = $@"{DateTime.Now.Ticks}_" + file.FileName;
+                var path = pathValue + myUniqueFileName;
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+                Console.WriteLine(path);
+            }
+
+            return myUniqueFileName;
+          
         }
 
         public async Task<bool> DeleteFile(string id, FileType type)
         {
             //Your code here;
+            //var returnValue = false;
+            //string pathWeb = _environment.ContentRootPath;
+            //if (id != null && type == FileType.ProfilePhoto)
+            //{
+            //    string pathString = pathWeb + _tempFolder;
+            //    var fileUrl = pathString + id;
+            //    File.Delete(fileUrl);
+            //    returnValue = true;
+
+            //}
+            //return returnValue;
             throw new NotImplementedException();
         }
 
